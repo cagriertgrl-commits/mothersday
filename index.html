@@ -30,47 +30,9 @@
 
         <!-- HOME PAGE -->
         <div id="home" class="page active">
-            <!-- Animasyonlu Lale -->
+            <!-- Animasyonlu Çiçek -->
             <div class="tulip-container">
-                <svg viewBox="0 0 120 250" class="tulip-animation">
-                    <!-- Gövde -->
-                    <path d="M60 200 Q55 140 60 70" fill="none" stroke="#2d7a3e" stroke-width="4" stroke-linecap="round"/>
-
-                    <!-- Yapraklar -->
-                    <ellipse cx="30" cy="130" rx="8" ry="35" fill="#4a9d5f" opacity="0.8" transform="rotate(-35 30 130)"/>
-                    <ellipse cx="90" cy="130" rx="8" ry="35" fill="#4a9d5f" opacity="0.8" transform="rotate(35 90 130)"/>
-
-                    <!-- Taç Yaprakları (Kalın Petals) -->
-                    <!-- Sol yaprak -->
-                    <path d="M60 70 Q35 45 25 15 Q35 40 60 65" fill="#ff1493" filter="url(#glow)"/>
-                    <path d="M60 70 Q35 45 25 15 Q35 40 60 65" fill="none" stroke="#d946a6" stroke-width="2" opacity="0.5"/>
-
-                    <!-- Orta ön yaprak -->
-                    <path d="M60 65 Q55 25 60 5 Q65 30 65 70" fill="#ff69b4" filter="url(#glow)"/>
-                    <path d="M60 65 Q55 25 60 5 Q65 30 65 70" fill="none" stroke="#d946a6" stroke-width="2" opacity="0.5"/>
-
-                    <!-- Sağ yaprak -->
-                    <path d="M60 70 Q85 45 95 15 Q85 40 60 65" fill="#ff1493" filter="url(#glow)"/>
-                    <path d="M60 70 Q85 45 95 15 Q85 40 60 65" fill="none" stroke="#d946a6" stroke-width="2" opacity="0.5"/>
-
-                    <!-- Orta arka yaprak (derinlik) -->
-                    <path d="M60 72 Q50 40 55 10 Q60 35 62 72" fill="#ff69b4" opacity="0.6" filter="url(#glow)"/>
-
-                    <!-- İç detaylar -->
-                    <circle cx="60" cy="65" r="4" fill="#ffd700" opacity="0.9"/>
-                    <circle cx="58" cy="63" r="2" fill="#fff" opacity="0.6"/>
-
-                    <!-- Glow Filter -->
-                    <defs>
-                        <filter id="glow">
-                            <feGaussianBlur stdDeviation="1" result="coloredBlur"/>
-                            <feMerge>
-                                <feMergeNode in="coloredBlur"/>
-                                <feMergeNode in="SourceGraphic"/>
-                            </feMerge>
-                        </filter>
-                    </defs>
-                </svg>
+                <img src="tulip.jpg" alt="Çiçek" class="tulip-animation">
             </div>
 
             <div class="header">

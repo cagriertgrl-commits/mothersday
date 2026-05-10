@@ -189,21 +189,26 @@ body {
 }
 
 .tulip-animation {
-    width: 140px;
-    height: 260px;
-    filter: drop-shadow(0 15px 25px rgba(217, 70, 166, 0.35));
-    animation: tulipBounce 3.5s ease-in-out infinite, tulipSway 4.5s ease-in-out infinite;
+    width: 160px;
+    height: auto;
+    filter: drop-shadow(0 0px 20px rgba(255, 215, 0, 0.4)) drop-shadow(0 15px 30px rgba(217, 70, 166, 0.3));
+    animation: tulipBounce 3.5s ease-in-out infinite, tulipSway 4.5s ease-in-out infinite, tulipGlow 2.5s ease-in-out infinite;
 }
 
 @keyframes tulipBounce {
     0%, 100% { transform: translateY(0px) scale(1); }
-    50% { transform: translateY(-20px) scale(1.08); }
+    50% { transform: translateY(-25px) scale(1.1); }
 }
 
 @keyframes tulipSway {
     0%, 100% { transform: rotateZ(0deg); }
-    25% { transform: rotateZ(-3deg) translateX(-2px); }
-    75% { transform: rotateZ(3deg) translateX(2px); }
+    25% { transform: rotateZ(-4deg) translateX(-3px); }
+    75% { transform: rotateZ(4deg) translateX(3px); }
+}
+
+@keyframes tulipGlow {
+    0%, 100% { filter: drop-shadow(0 0px 20px rgba(255, 215, 0, 0.4)) drop-shadow(0 15px 30px rgba(217, 70, 166, 0.3)); }
+    50% { filter: drop-shadow(0 0px 35px rgba(255, 215, 0, 0.8)) drop-shadow(0 20px 40px rgba(217, 70, 166, 0.5)); }
 }
 
 .home-content {

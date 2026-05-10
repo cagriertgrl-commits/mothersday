@@ -1,3 +1,60 @@
+// PAGE ROUTER
+function goToPage(pageName) {
+    document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+    });
+    document.getElementById(pageName).classList.add('active');
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+    });
+    document.getElementById('nav-' + pageName)?.classList.add('active');
+    window.scrollTo(0, 0);
+}
+
+// SPECIAL MESSAGES
+const specialMessages = [
+    "Seni seviyorum Anne! 💜",
+    "Her gün bir hediye gibi senin yüzüne bakmak... 💌",
+    "Anneler olmadan hiçbir şey eksik kalırdı. Teşekkürler! 💐",
+    "Sen benim en güzel hatıram, en güzel hediyem... 💫",
+    "Sevgin, hayatımın en önemli parçası. Teşekkürler! ❤️",
+    "Bu dünyada senin gibi birisi var olduğu için şanslıyım. 💜",
+    "Her skor, sana olan sevgimin bir göstergesi... 🌸"
+];
+
+// SOUND FUNCTIONS
+function playSound(type) {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const oscillator = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+
+    oscillator.connect(gain);
+    gain.connect(audioContext.destination);
+    gain.gain.setValueAtTime(0.3, audioContext.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+
+    if (type === 'jump') {
+        oscillator.frequency.setValueAtTime(400, audioContext.currentTime);
+    } else if (type === 'score') {
+        oscillator.frequency.setValueAtTime(600, audioContext.currentTime);
+    } else if (type === 'record') {
+        oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+    }
+
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + 0.1);
+}
+
+function fireConfetti() {
+    confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#d946a6', '#ec4899', '#ffd700', '#ffed4e', '#ffd6e8']
+    });
+}
+
 // Oyun Değişkenleri
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
@@ -9,10 +66,11 @@ const bestScoreDisplay = document.getElementById('bestScore');
 const finalScoreDisplay = document.getElementById('finalScore');
 const recordBreakDisplay = document.getElementById('recordBreak');
 const leaderboard = document.getElementById('leaderboard');
+const specialMessageDiv = document.getElementById('specialMessage');
+const messageText = document.getElementById('messageText');
 
 // Canvas responsive ayarı
 function resizeCanvas() {
-    const rect = canvas.getBoundingClientRect();
     canvas.width = 400;
     canvas.height = 600;
 }
@@ -59,6 +117,7 @@ function startGame() {
     gameContainer.style.display = 'block';
     gameOverScreen.style.display = 'none';
     recordBreakDisplay.style.display = 'none';
+    specialMessageDiv.style.display = 'none';
 
     gameRunning = true;
     score = 0;
@@ -165,7 +224,14 @@ function endGame() {
         localStorage.setItem('bestScore', bestScore);
         bestScoreDisplay.textContent = bestScore;
         updateLeaderboard();
+        fireConfetti();
+        playSound('record');
     }
+
+    // Özel mesaj göster
+    const randomMessage = specialMessages[Math.floor(Math.random() * specialMessages.length)];
+    messageText.textContent = randomMessage;
+    specialMessageDiv.style.display = 'block';
 
     gameOverScreen.style.display = 'flex';
 }
@@ -192,9 +258,9 @@ updateLeaderboard();
 // Ana Oyun Loop
 function gameLoop() {
     // Zorluk seviyeleri - Skor arttıkça daha zor
-    pipeGap = Math.max(110, basePipeGap - score / 25); // Boşluk azalıyor (minimum 110)
-    pipeSpacing = Math.max(170, basePipeSpacing - score / 40); // Çubuklar yakınlaşıyor (daha yavaş)
-    pipeSpeed = basePipeSpeed + (score / 50) * 1.2; // Hız artıyor (daha yumuşak)
+    pipeGap = Math.max(110, basePipeGap - score / 25);
+    pipeSpacing = Math.max(170, basePipeSpacing - score / 40);
+    pipeSpeed = basePipeSpeed + (score / 50) * 1.2;
 
     // Arka plan
     ctx.fillStyle = '#fff5f8';
@@ -221,6 +287,7 @@ function gameLoop() {
             pipe.scored = true;
             score++;
             scoreDisplay.textContent = score;
+            playSound('score');
         }
 
         // Boru hızını ayarla
@@ -232,6 +299,7 @@ function gameLoop() {
 
     // Çarpışma kontrolü
     if (checkCollision()) {
+        playSound('jump');
         endGame();
         return;
     }
@@ -245,6 +313,7 @@ function gameLoop() {
 document.addEventListener('click', (e) => {
     if (gameRunning) {
         player.velocity = player.jump;
+        playSound('jump');
     }
 });
 
@@ -252,6 +321,7 @@ document.addEventListener('keydown', (e) => {
     if (e.code === 'Space' && gameRunning) {
         e.preventDefault();
         player.velocity = player.jump;
+        playSound('jump');
     }
 });
 
@@ -259,5 +329,9 @@ document.addEventListener('keydown', (e) => {
 document.addEventListener('touchstart', () => {
     if (gameRunning) {
         player.velocity = player.jump;
+        playSound('jump');
     }
 });
+
+// Başlangıç - Home page'i göster
+goToPage('home');

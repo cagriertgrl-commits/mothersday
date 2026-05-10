@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eminenin Anneler Günü - Oyun</title>
+    <title>Annemize Sevgimiz Sonsuz 💜</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 </head>
 <body>
     <div class="container">
-        <!-- Arka Plan Animasyonu -->
+        <!-- Arka Plan -->
         <div class="background">
             <div class="flower flower1">🌸</div>
             <div class="flower flower2">🌹</div>
@@ -17,62 +18,188 @@
             <div class="flower flower5">🌷</div>
         </div>
 
-        <!-- Başlık -->
-        <div class="header">
-            <div class="gift-from">
-                <p>🎁 Ömer Alp & Ahmet Demir'in Anneler Günü Hediyesi</p>
+        <!-- NAVIGATION -->
+        <nav class="navbar">
+            <div class="nav-links">
+                <a href="#" onclick="goToPage('home')" class="nav-link active" id="nav-home">🏠 Anasayfa</a>
+                <a href="#" onclick="goToPage('game')" class="nav-link" id="nav-game">🎮 Oyun</a>
+                <a href="#" onclick="goToPage('gallery')" class="nav-link" id="nav-gallery">🖼️ Galeri</a>
+                <a href="#" onclick="goToPage('about')" class="nav-link" id="nav-about">💜 Hakkında</a>
             </div>
-            <h1>Annemize Sevgimiz Sonsuz 💜</h1>
-            <div class="divider"></div>
-        </div>
+        </nav>
 
-        <!-- Menü Ekranı -->
-        <div id="menu" class="menu-screen">
-            <div class="menu-content">
-                <div class="photo-container">
+        <!-- HOME PAGE -->
+        <div id="home" class="page active">
+            <div class="header">
+                <div class="gift-from">
+                    <p>🎁 Ömer Alp & Ahmet Demir'in Anneler Günü Hediyesi</p>
+                </div>
+                <h1>Annemize Sevgimiz Sonsuz 💜</h1>
+                <div class="divider"></div>
+            </div>
+
+            <div class="home-content">
+                <div class="photo-container large">
                     <img src="8203d601-94e5-428c-bb74-a95c1f358ce5.jpg" alt="Eminem" class="menu-photo">
                 </div>
-                <h2>Anneme Sevgimiz Sonsuz! 💜</h2>
-                <p>Eminenin kafasıyla çiçeklerden kaçın ve rekor kırın!</p>
 
-                <div class="high-scores">
-                    <h3>🏆 En Yüksek Skorlar:</h3>
-                    <div id="leaderboard">
-                        <p>Henüz rekor yok...</p>
-                    </div>
+                <div class="welcome-message">
+                    <h2>Hoş Geldin Sevgili Anne! 💌</h2>
+                    <p>Bu özel hediye, sana olan sonsuz sevgimizin bir göstergesi.</p>
+                    <p>Senin için hazırladığımız bu oyunu oynamak için aşağıdaki butonuna tıkla.</p>
                 </div>
 
-                <button class="play-btn" onclick="startGame()">OYUNU BAŞLAT 🎮</button>
-            </div>
-        </div>
+                <button class="play-btn large" onclick="goToPage('game')">OYUNU BAŞLAT 🎮</button>
 
-        <!-- Oyun Ekranı -->
-        <div id="gameContainer" class="game-screen" style="display: none;">
-            <div class="game-header">
-                <div class="score">Skor: <span id="score">0</span></div>
-                <div class="best">En İyi: <span id="bestScore">0</span></div>
-            </div>
-
-            <canvas id="gameCanvas" width="400" height="600"></canvas>
-
-            <div id="gameOver" class="game-over" style="display: none;">
-                <div class="game-over-content">
-                    <h2>Oyun Bitti!</h2>
-                    <p>Senin Skorun: <span id="finalScore">0</span></p>
-                    <div id="recordBreak" class="record-break" style="display: none;">
-                        <p>🎉 YENİ REKOR! 🎉</p>
+                <div class="home-features">
+                    <div class="feature">
+                        <span>🏆</span>
+                        <p>Yüksek Skor Yap</p>
                     </div>
-                    <button onclick="location.reload()">Tekrar Oyna</button>
+                    <div class="feature">
+                        <span>🌸</span>
+                        <p>Çiçekleri Kaç</p>
+                    </div>
+                    <div class="feature">
+                        <span>💜</span>
+                        <p>Sevginize Tanık Ol</p>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Kurallar -->
-        <div class="rules">
-            <h3>📋 Nasıl Oynanır?</h3>
-            <p>🖱️ <strong>Click</strong> yap veya <strong>Spacebar</strong> basarak Eminenin kafasını yukarı kaldır</p>
-            <p>🌸 Çiçekleri kaç, rekor kır!</p>
-            <p>⏱️ Anneler Günü bitince oyun silinecek 🗑️</p>
+        <!-- GAME PAGE -->
+        <div id="game" class="page">
+            <div class="header">
+                <div class="gift-from">
+                    <p>🎁 Ömer Alp & Ahmet Demir'in Anneler Günü Hediyesi</p>
+                </div>
+                <h1>Annemize Sevgimiz Sonsuz 💜</h1>
+                <div class="divider"></div>
+            </div>
+
+            <!-- Menü Ekranı -->
+            <div id="menu" class="menu-screen">
+                <div class="menu-content">
+                    <div class="photo-container">
+                        <img src="8203d601-94e5-428c-bb74-a95c1f358ce5.jpg" alt="Eminem" class="menu-photo">
+                    </div>
+                    <h2>Anneme Sevgimiz Sonsuz! 💜</h2>
+                    <p>Eminenin kafasıyla çiçeklerden kaçın ve rekor kırın!</p>
+
+                    <div class="high-scores">
+                        <h3>🏆 En Yüksek Skorlar:</h3>
+                        <div id="leaderboard">
+                            <p>Henüz rekor yok...</p>
+                        </div>
+                    </div>
+
+                    <button class="play-btn" onclick="startGame()">OYUNU BAŞLAT 🎮</button>
+                </div>
+            </div>
+
+            <!-- Oyun Ekranı -->
+            <div id="gameContainer" class="game-screen" style="display: none;">
+                <div class="game-header">
+                    <div class="score">Skor: <span id="score">0</span></div>
+                    <div class="best">En İyi: <span id="bestScore">0</span></div>
+                </div>
+
+                <canvas id="gameCanvas" width="400" height="600"></canvas>
+
+                <div id="gameOver" class="game-over" style="display: none;">
+                    <div class="game-over-content">
+                        <h2>Oyun Bitti!</h2>
+                        <p>Senin Skorun: <span id="finalScore">0</span></p>
+                        <div id="recordBreak" class="record-break" style="display: none;">
+                            <p>🎉 YENİ REKOR! 🎉</p>
+                        </div>
+                        <div class="special-message" id="specialMessage" style="display: none;">
+                            <p id="messageText"></p>
+                        </div>
+                        <button onclick="location.reload()">Tekrar Oyna</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kurallar -->
+            <div class="rules">
+                <h3>📋 Nasıl Oynanır?</h3>
+                <p>🖱️ <strong>Click</strong> yap veya <strong>Spacebar</strong> basarak Eminenin kafasını yukarı kaldır</p>
+                <p>🌸 Çiçekleri kaç, rekor kır!</p>
+                <p>💜 Her skor, sana olan sevgimizin bir parçası</p>
+            </div>
+        </div>
+
+        <!-- GALLERY PAGE -->
+        <div id="gallery" class="page">
+            <div class="header">
+                <h1>Anı Galerisi 🖼️</h1>
+                <div class="divider"></div>
+            </div>
+
+            <div class="gallery-content">
+                <div class="gallery-item">
+                    <img src="8203d601-94e5-428c-bb74-a95c1f358ce5.jpg" alt="Anne">
+                    <p>Sevgili Anne</p>
+                </div>
+                <div class="gallery-info">
+                    <h2>Bize Yol Gösteren Kişi 💫</h2>
+                    <p>Her gün için teşekkürler. Senin sevgin, iyiliğin ve çaban biz olmadan kesinlikle mümkün değildi.</p>
+                    <p>Bu oyun, küçük bir teşekkür. Asıl hediye sensin, her zaman olmuşsun.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABOUT PAGE -->
+        <div id="about" class="page">
+            <div class="header">
+                <h1>Anneler Günü 💜</h1>
+                <div class="divider"></div>
+            </div>
+
+            <div class="about-content">
+                <div class="about-card">
+                    <h2>Anneler Günü Nedir?</h2>
+                    <p>Anneler Günü, tüm annelerin fedakarlığını ve sevgisini kutlamak için belirlenmiş özel bir gündür. Bu gün, anne-çocuk ilişkisinin ne kadar kıymetli olduğunu hatırlatır.</p>
+                </div>
+
+                <div class="about-card">
+                    <h2>Senin İçin 💌</h2>
+                    <p>Bu hediye, sana olan sonsuz sevgimizi ifade etmenin bir yoludur. Senin yaptığın fedakarlıklar, verdiğin öğütler ve gösterdiğin sevgi, bizim en büyük hazinelerimizdir.</p>
+                    <p>Her gün seni düşünüyor, her anı kıymetli buluyoruz. Anneler Günü'nde ve her gün, teşekkürlerimiz sonsuz.</p>
+                </div>
+
+                <div class="about-card">
+                    <h2>Ömer Alp & Ahmet Demir 🎁</h2>
+                    <p>Seninle her anı yaşadığımız için mutluyuz. Senin gülüşün, iyiliğin ve sevgin, hayatımızın en güzel renkleri.</p>
+                    <p>Seni seviyoruz. Seni çok seviyoruz. ❤️</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- THANK YOU PAGE (Hidden, shown after game) -->
+        <div id="thankYou" class="page">
+            <div class="header">
+                <h1>Teşekkür Ederiz 💜</h1>
+                <div class="divider"></div>
+            </div>
+
+            <div class="thank-you-content">
+                <div class="thank-you-card">
+                    <h2>Oyun Sonlandı</h2>
+                    <p id="finalScoreDisplay"></p>
+                    <p class="thank-message">Bu hediyeyi kabul ettiğin için çok teşekkürler.</p>
+                    <p>Umarız bu oyun, sana mutluluk vermiştir. Her skor, her anlık, senin sevgine olan inancımızın göstergesidir.</p>
+                    <button class="play-btn" onclick="goToPage('home')">Anasayfaya Dön</button>
+                </div>
+
+                <div class="hearts">
+                    <span>💜</span>
+                    <span>💜</span>
+                    <span>💜</span>
+                </div>
+            </div>
         </div>
     </div>
 

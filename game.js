@@ -38,7 +38,6 @@ const player = {
 
 // Resim yükleme
 player.image.src = '8203d601-94e5-428c-bb74-a95c1f358ce5.jpg';
-player.image.onload = () => console.log('Resim yüklendi');
 
 // Borular (Çiçekler)
 let pipes = [];
@@ -56,10 +55,10 @@ bestScoreDisplay.textContent = bestScore;
 
 // Oyun Başlat
 function startGame() {
-    console.log('startGame() çağrıldı');
     menuScreen.style.display = 'none';
     gameContainer.style.display = 'block';
     gameOverScreen.style.display = 'none';
+    recordBreakDisplay.style.display = 'none';
 
     gameRunning = true;
     score = 0;
@@ -76,7 +75,6 @@ function startGame() {
     pipeSpeed = basePipeSpeed;
 
     scoreDisplay.textContent = score;
-    console.log('Oyun başladı, gameRunning:', gameRunning);
     gameLoop();
 }
 
@@ -165,6 +163,7 @@ function endGame() {
         isRecordBreak = true;
         recordBreakDisplay.style.display = 'block';
         localStorage.setItem('bestScore', bestScore);
+        bestScoreDisplay.textContent = bestScore;
         updateLeaderboard();
     }
 
@@ -193,7 +192,6 @@ updateLeaderboard();
 // Ana Oyun Loop
 function gameLoop() {
     // Zorluk seviyeleri - Skor arttıkça daha zor
-    let difficultyMultiplier = 1 + (score / 50) * 0.3; // Her 50 skorlarda %30 artar
     pipeGap = Math.max(100, basePipeGap - score / 20); // Boşluk azalıyor (minimum 100)
     pipeSpacing = Math.max(160, basePipeSpacing - score / 30); // Çubuklar yakınlaşıyor
     pipeSpeed = basePipeSpeed + (score / 40) * 1.5; // Hız artıyor (max +1.5)
@@ -247,7 +245,6 @@ function gameLoop() {
 document.addEventListener('click', (e) => {
     if (gameRunning) {
         player.velocity = player.jump;
-        console.log('Click detected - Jump!');
     }
 });
 
@@ -255,7 +252,6 @@ document.addEventListener('keydown', (e) => {
     if (e.code === 'Space' && gameRunning) {
         e.preventDefault();
         player.velocity = player.jump;
-        console.log('Space pressed - Jump!');
     }
 });
 
@@ -263,9 +259,5 @@ document.addEventListener('keydown', (e) => {
 document.addEventListener('touchstart', () => {
     if (gameRunning) {
         player.velocity = player.jump;
-        console.log('Touch detected - Jump!');
     }
 });
-
-// Başlangıçta leaderboard'ı göster
-console.log('Oyun yüklendi! Oynamaya başla.', 'gameRunning:', gameRunning);

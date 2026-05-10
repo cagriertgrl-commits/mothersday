@@ -30,17 +30,16 @@ function showGameMenu() {
 }
 
 function selectGame(gameName) {
+    gameMenu.style.display = 'none';
     if (gameName === 'flappy') {
-        gameMenu.style.display = 'none';
         menu.style.display = 'block';
         gameContainer.style.display = 'none';
         memoryContainer.style.display = 'none';
     } else if (gameName === 'memory') {
-        gameMenu.style.display = 'none';
         menu.style.display = 'none';
         gameContainer.style.display = 'none';
         memoryContainer.style.display = 'block';
-        initMemoryGame();
+        setTimeout(() => initMemoryGame(), 100);
     }
 }
 
@@ -125,10 +124,12 @@ let basePipeSpeed = 4;
 // En iyi skoru yükle
 bestScoreDisplay.textContent = bestScore;
 
-// Oyun Başlat
+// Oyun Başlat (Flappy Bird)
 function startGame() {
-    menuScreen.style.display = 'none';
+    gameMenu.style.display = 'none';
+    menu.style.display = 'none';
     gameContainer.style.display = 'block';
+    memoryContainer.style.display = 'none';
     gameOverScreen.style.display = 'none';
     recordBreakDisplay.style.display = 'none';
     specialMessageDiv.style.display = 'none';

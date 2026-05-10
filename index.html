@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eminenin Anneler Günü - Oyun</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Arka Plan Animasyonu -->
+        <div class="background">
+            <div class="flower flower1">🌸</div>
+            <div class="flower flower2">🌹</div>
+            <div class="flower flower3">🌺</div>
+            <div class="flower flower4">💐</div>
+            <div class="flower flower5">🌷</div>
+        </div>
+
+        <!-- Başlık -->
+        <div class="header">
+            <h1>Annelere Sevgimiz Sonsuz 💜</h1>
+            <p>Eminenin Anneler Günü Oyunu</p>
+        </div>
+
+        <!-- Menü Ekranı -->
+        <div id="menu" class="menu-screen">
+            <div class="menu-content">
+                <div class="photo-container">
+                    <img src="8203d601-94e5-428c-bb74-a95c1f358ce5.jpg" alt="Eminem" class="menu-photo">
+                </div>
+                <h2>Anneme Sevgimiz Sonsuz! 💜</h2>
+                <p>Eminenin kafasıyla çiçeklerden kaçın ve rekor kırın!</p>
+
+                <div class="high-scores">
+                    <h3>🏆 En Yüksek Skorlar:</h3>
+                    <div id="leaderboard">
+                        <p>Henüz rekor yok...</p>
+                    </div>
+                </div>
+
+                <button class="play-btn" onclick="startGame()">OYUNU BAŞLAT 🎮</button>
+            </div>
+        </div>
+
+        <!-- Oyun Ekranı -->
+        <div id="gameContainer" class="game-screen" style="display: none;">
+            <div class="game-header">
+                <div class="score">Skor: <span id="score">0</span></div>
+                <div class="best">En İyi: <span id="bestScore">0</span></div>
+            </div>
+
+            <canvas id="gameCanvas" width="400" height="600"></canvas>
+
+            <div id="gameOver" class="game-over" style="display: none;">
+                <div class="game-over-content">
+                    <h2>Oyun Bitti!</h2>
+                    <p>Senin Skorun: <span id="finalScore">0</span></p>
+                    <div id="recordBreak" class="record-break" style="display: none;">
+                        <p>🎉 YENİ REKOR! 🎉</p>
+                    </div>
+                    <button onclick="location.reload()">Tekrar Oyna</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kurallar -->
+        <div class="rules">
+            <h3>📋 Nasıl Oynanır?</h3>
+            <p>🖱️ <strong>Click</strong> yap veya <strong>Spacebar</strong> basarak Eminenin kafasını yukarı kaldır</p>
+            <p>🌸 Çiçekleri kaç, rekor kır!</p>
+            <p>⏱️ Anneler Günü bitince oyun silinecek 🗑️</p>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

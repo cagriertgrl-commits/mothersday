@@ -83,6 +83,23 @@
                 <div class="divider"></div>
             </div>
 
+            <!-- Oyun Seçimi -->
+            <div id="gameMenu" class="game-menu" style="display: none;">
+                <div class="game-menu-content">
+                    <h2>Hangi Oyunu Oynamak İstiyorsun? 🎮</h2>
+                    <div class="game-options">
+                        <button class="game-option-btn" onclick="selectGame('flappy')">
+                            <span>🐦 Flappy Bird</span>
+                            <p>Çiçeklerden kaç, rekor kır!</p>
+                        </button>
+                        <button class="game-option-btn" onclick="selectGame('memory')">
+                            <span>🧠 Memory Match</span>
+                            <p>Fotoğrafları eşleştir!</p>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
             <!-- Menü Ekranı -->
             <div id="menu" class="menu-screen">
                 <div class="menu-content">
@@ -122,6 +139,28 @@
                             <p id="messageText"></p>
                         </div>
                         <button onclick="location.reload()">Tekrar Oyna</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MEMORY GAME -->
+            <div id="memoryContainer" class="memory-screen" style="display: none;">
+                <div class="memory-header">
+                    <h2>Fotoğrafları Eşleştir 🧠</h2>
+                    <div class="memory-stats">
+                        <span>Eşleşme: <span id="matches">0</span>/8</span>
+                        <span>Hamle: <span id="moves">0</span></span>
+                    </div>
+                </div>
+
+                <div class="memory-board" id="memoryBoard"></div>
+
+                <div id="memoryGameOver" class="game-over" style="display: none;">
+                    <div class="game-over-content">
+                        <h2>Oyun Bitti! 🎉</h2>
+                        <p>Hamle: <span id="finalMoves">0</span></p>
+                        <p>Süre: <span id="finalTime">0</span>s</p>
+                        <button onclick="restartMemory()">Tekrar Oyna</button>
                     </div>
                 </div>
             </div>

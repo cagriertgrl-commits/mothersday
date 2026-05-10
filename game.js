@@ -9,7 +9,39 @@ function goToPage(pageName) {
         link.classList.remove('active');
     });
     document.getElementById('nav-' + pageName)?.classList.add('active');
+
+    if (pageName === 'game') {
+        showGameMenu();
+    }
     window.scrollTo(0, 0);
+}
+
+// GAME SELECTION
+const gameMenu = document.getElementById('gameMenu');
+const menu = document.getElementById('menu');
+const gameContainer = document.getElementById('gameContainer');
+const memoryContainer = document.getElementById('memoryContainer');
+
+function showGameMenu() {
+    gameMenu.style.display = 'block';
+    menu.style.display = 'none';
+    gameContainer.style.display = 'none';
+    memoryContainer.style.display = 'none';
+}
+
+function selectGame(gameName) {
+    if (gameName === 'flappy') {
+        gameMenu.style.display = 'none';
+        menu.style.display = 'block';
+        gameContainer.style.display = 'none';
+        memoryContainer.style.display = 'none';
+    } else if (gameName === 'memory') {
+        gameMenu.style.display = 'none';
+        menu.style.display = 'none';
+        gameContainer.style.display = 'none';
+        memoryContainer.style.display = 'block';
+        initMemoryGame();
+    }
 }
 
 // SPECIAL MESSAGES
@@ -339,6 +371,93 @@ document.addEventListener('touchstart', () => {
         playSound('jump');
     }
 });
+
+// MEMORY GAME
+let memoryCards = [];
+let flipped = [];
+let matched = 0;
+let moves = 0;
+let startTime = 0;
+let gameTime = 0;
+
+const photos = ['photo1.jpg', 'photo2.jpg', 'photo3.jpg', 'photo4.jpg',
+                'photo5.jpg', 'photo6.jpg', 'photo7.jpg', 'photo8.jpg'];
+
+function initMemoryGame() {
+    memoryCards = [];
+    flipped = [];
+    matched = 0;
+    moves = 0;
+    startTime = Date.now();
+
+    // Kartları oluştur (her foto 2 kez)
+    const gamePhotos = [...photos, ...photos];
+    gamePhotos.sort(() => Math.random() - 0.5);
+
+    const board = document.getElementById('memoryBoard');
+    board.innerHTML = '';
+
+    gamePhotos.forEach((photo, index) => {
+        const card = document.createElement('button');
+        card.className = 'memory-card';
+        card.dataset.photo = photo;
+        card.dataset.index = index;
+
+        const img = document.createElement('img');
+        img.src = photo;
+        card.appendChild(img);
+
+        card.addEventListener('click', () => flipCard(card));
+        board.appendChild(card);
+        memoryCards.push(card);
+    });
+
+    document.getElementById('matches').textContent = '0';
+    document.getElementById('moves').textContent = '0';
+}
+
+function flipCard(card) {
+    if (flipped.length >= 2 || card.classList.contains('flipped') || card.classList.contains('matched')) {
+        return;
+    }
+
+    card.classList.add('flipped');
+    flipped.push(card);
+
+    if (flipped.length === 2) {
+        moves++;
+        document.getElementById('moves').textContent = moves;
+
+        setTimeout(() => {
+            if (flipped[0].dataset.photo === flipped[1].dataset.photo) {
+                flipped[0].classList.add('matched');
+                flipped[1].classList.add('matched');
+                matched++;
+                document.getElementById('matches').textContent = matched;
+
+                if (matched === photos.length) {
+                    endMemoryGame();
+                }
+            } else {
+                flipped[0].classList.remove('flipped');
+                flipped[1].classList.remove('flipped');
+            }
+            flipped = [];
+        }, 600);
+    }
+}
+
+function endMemoryGame() {
+    gameTime = Math.floor((Date.now() - startTime) / 1000);
+    document.getElementById('finalMoves').textContent = moves;
+    document.getElementById('finalTime').textContent = gameTime;
+    document.getElementById('memoryGameOver').style.display = 'flex';
+}
+
+function restartMemory() {
+    document.getElementById('memoryGameOver').style.display = 'none';
+    initMemoryGame();
+}
 
 // Başlangıç - Home page'i göster
 goToPage('home');

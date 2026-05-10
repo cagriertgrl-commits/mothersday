@@ -1,0 +1,5 @@
+<claude-code-hint v="1" type="plugin" value="vercel@claude-plugins-official" />
+WARNING! `--confirm` is deprecated, please use `--yes` instead
+The "--name" option is deprecated (https://vercel.link/name-flag)
+Loading scopes…
+Error: The token provided via `--token` argument is not valid. Please provide a valid token.

@@ -43,11 +43,11 @@ player.image.src = '8203d601-94e5-428c-bb74-a95c1f358ce5.jpg';
 let pipes = [];
 let pipeGap = 180;
 let pipeWidth = 80;
-let pipeSpacing = 220;
+let pipeSpacing = 200;
 let nextPipeX = 300;
 let pipeSpeed = 4;
 let basePipeGap = 180;
-let basePipeSpacing = 220;
+let basePipeSpacing = 200;
 let basePipeSpeed = 4;
 
 // En iyi skoru yükle
@@ -192,9 +192,9 @@ updateLeaderboard();
 // Ana Oyun Loop
 function gameLoop() {
     // Zorluk seviyeleri - Skor arttıkça daha zor
-    pipeGap = Math.max(100, basePipeGap - score / 20); // Boşluk azalıyor (minimum 100)
-    pipeSpacing = Math.max(160, basePipeSpacing - score / 30); // Çubuklar yakınlaşıyor
-    pipeSpeed = basePipeSpeed + (score / 40) * 1.5; // Hız artıyor (max +1.5)
+    pipeGap = Math.max(110, basePipeGap - score / 25); // Boşluk azalıyor (minimum 110)
+    pipeSpacing = Math.max(170, basePipeSpacing - score / 40); // Çubuklar yakınlaşıyor (daha yavaş)
+    pipeSpeed = basePipeSpeed + (score / 50) * 1.2; // Hız artıyor (daha yumuşak)
 
     // Arka plan
     ctx.fillStyle = '#fff5f8';

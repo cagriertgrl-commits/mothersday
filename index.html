@@ -32,34 +32,38 @@
         <div id="home" class="page active">
             <!-- Animasyonlu Lale -->
             <div class="tulip-container">
-                <svg viewBox="0 0 100 200" class="tulip-animation">
+                <svg viewBox="0 0 120 250" class="tulip-animation">
                     <!-- Gövde -->
-                    <path d="M50 150 Q45 110 50 60" fill="none" stroke="#2d7a3e" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M60 200 Q55 140 60 70" fill="none" stroke="#2d7a3e" stroke-width="4" stroke-linecap="round"/>
 
                     <!-- Yapraklar -->
-                    <path d="M50 120 Q35 100 30 70" fill="none" stroke="#4a9d5f" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
-                    <path d="M50 120 Q65 100 70 70" fill="none" stroke="#4a9d5f" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+                    <ellipse cx="30" cy="130" rx="8" ry="35" fill="#4a9d5f" opacity="0.8" transform="rotate(-35 30 130)"/>
+                    <ellipse cx="90" cy="130" rx="8" ry="35" fill="#4a9d5f" opacity="0.8" transform="rotate(35 90 130)"/>
 
-                    <!-- Taç Yaprakları (Petals) -->
+                    <!-- Taç Yaprakları (Kalın Petals) -->
                     <!-- Sol yaprak -->
-                    <path d="M50 60 Q20 40 15 20 Q25 35 50 50" fill="#ff1493" filter="url(#glow)"/>
-                    <path d="M50 60 Q20 40 15 20 Q25 35 50 50" fill="none" stroke="#ff69b4" stroke-width="1.5" opacity="0.6"/>
+                    <path d="M60 70 Q35 45 25 15 Q35 40 60 65" fill="#ff1493" filter="url(#glow)"/>
+                    <path d="M60 70 Q35 45 25 15 Q35 40 60 65" fill="none" stroke="#d946a6" stroke-width="2" opacity="0.5"/>
 
-                    <!-- Orta yaprak -->
-                    <path d="M50 50 Q50 15 50 5 Q55 25 55 55" fill="#ff69b4" filter="url(#glow)"/>
-                    <path d="M50 50 Q50 15 50 5 Q55 25 55 55" fill="none" stroke="#ff1493" stroke-width="1.5" opacity="0.6"/>
+                    <!-- Orta ön yaprak -->
+                    <path d="M60 65 Q55 25 60 5 Q65 30 65 70" fill="#ff69b4" filter="url(#glow)"/>
+                    <path d="M60 65 Q55 25 60 5 Q65 30 65 70" fill="none" stroke="#d946a6" stroke-width="2" opacity="0.5"/>
 
                     <!-- Sağ yaprak -->
-                    <path d="M50 60 Q80 40 85 20 Q75 35 50 50" fill="#ff1493" filter="url(#glow)"/>
-                    <path d="M50 60 Q80 40 85 20 Q75 35 50 50" fill="none" stroke="#ff69b4" stroke-width="1.5" opacity="0.6"/>
+                    <path d="M60 70 Q85 45 95 15 Q85 40 60 65" fill="#ff1493" filter="url(#glow)"/>
+                    <path d="M60 70 Q85 45 95 15 Q85 40 60 65" fill="none" stroke="#d946a6" stroke-width="2" opacity="0.5"/>
+
+                    <!-- Orta arka yaprak (derinlik) -->
+                    <path d="M60 72 Q50 40 55 10 Q60 35 62 72" fill="#ff69b4" opacity="0.6" filter="url(#glow)"/>
 
                     <!-- İç detaylar -->
-                    <circle cx="50" cy="55" r="3" fill="#ffd700" opacity="0.8"/>
+                    <circle cx="60" cy="65" r="4" fill="#ffd700" opacity="0.9"/>
+                    <circle cx="58" cy="63" r="2" fill="#fff" opacity="0.6"/>
 
                     <!-- Glow Filter -->
                     <defs>
                         <filter id="glow">
-                            <feGaussianBlur stdDeviation="0.7" result="coloredBlur"/>
+                            <feGaussianBlur stdDeviation="1" result="coloredBlur"/>
                             <feMerge>
                                 <feMergeNode in="coloredBlur"/>
                                 <feMergeNode in="SourceGraphic"/>

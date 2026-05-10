@@ -92,15 +92,12 @@ body {
 /* PAGES */
 .page {
     display: none;
-    opacity: 0;
-    animation: pageIn 0.5s ease forwards;
     position: relative;
     z-index: 10;
 }
 
 .page.active {
-    display: block;
-    opacity: 1;
+    display: block !important;
 }
 
 @keyframes pageIn {

@@ -52,6 +52,7 @@ bestScoreDisplay.textContent = bestScore;
 
 // Oyun Başlat
 function startGame() {
+    console.log('startGame() çağrıldı');
     menuScreen.style.display = 'none';
     gameContainer.style.display = 'block';
     gameOverScreen.style.display = 'none';
@@ -66,6 +67,7 @@ function startGame() {
     nextPipeX = 300;
 
     scoreDisplay.textContent = score;
+    console.log('Oyun başladı, gameRunning:', gameRunning);
     gameLoop();
 }
 
@@ -162,7 +164,7 @@ function endGame() {
 
 // Leaderboard Güncelle
 function updateLeaderboard() {
-    const scores = JSON.parse(localStorage.getItem('scores')) || [];
+    let scores = JSON.parse(localStorage.getItem('scores')) || [];
     scores.push({ score: score, date: new Date().toLocaleDateString('tr-TR') });
     scores.sort((a, b) => b.score - a.score);
     scores = scores.slice(0, 5);
@@ -227,9 +229,10 @@ function gameLoop() {
 }
 
 // Kontroller
-document.addEventListener('click', () => {
+document.addEventListener('click', (e) => {
     if (gameRunning) {
         player.velocity = player.jump;
+        console.log('Click detected - Jump!');
     }
 });
 
@@ -237,15 +240,17 @@ document.addEventListener('keydown', (e) => {
     if (e.code === 'Space' && gameRunning) {
         e.preventDefault();
         player.velocity = player.jump;
+        console.log('Space pressed - Jump!');
     }
 });
 
 // Touch kontrol (mobil)
-canvas.addEventListener('touchstart', () => {
+document.addEventListener('touchstart', () => {
     if (gameRunning) {
         player.velocity = player.jump;
+        console.log('Touch detected - Jump!');
     }
 });
 
 // Başlangıçta leaderboard'ı göster
-console.log('Oyun yüklendi! Oynamaya başla.');
+console.log('Oyun yüklendi! Oynamaya başla.', 'gameRunning:', gameRunning);

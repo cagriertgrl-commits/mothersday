@@ -1,14 +1,26 @@
 // PAGE ROUTER
 function goToPage(pageName) {
+    console.log('goToPage called with:', pageName);
+
     document.querySelectorAll('.page').forEach(page => {
         page.classList.remove('active');
     });
-    document.getElementById(pageName).classList.add('active');
+
+    const targetPage = document.getElementById(pageName);
+    console.log('Target page found:', targetPage);
+
+    if (targetPage) {
+        targetPage.classList.add('active');
+    }
 
     document.querySelectorAll('.nav-link').forEach(link => {
         link.classList.remove('active');
     });
-    document.getElementById('nav-' + pageName)?.classList.add('active');
+
+    const navLink = document.getElementById('nav-' + pageName);
+    if (navLink) {
+        navLink.classList.add('active');
+    }
 
     if (pageName === 'game') {
         showGameMenu();
@@ -71,7 +83,6 @@ function fireConfetti() {
 // Oyun Değişkenleri
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
-const gameContainer = document.getElementById('gameContainer');
 const menuScreen = document.getElementById('menu');
 const gameOverScreen = document.getElementById('gameOver');
 const scoreDisplay = document.getElementById('score');

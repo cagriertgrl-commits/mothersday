@@ -23,27 +23,9 @@ const specialMessages = [
     "Her skor, sana olan sevgimin bir göstergesi... 🌸"
 ];
 
-// SOUND FUNCTIONS
+// SOUND FUNCTIONS (Disabled)
 function playSound(type) {
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    const oscillator = audioContext.createOscillator();
-    const gain = audioContext.createGain();
-
-    oscillator.connect(gain);
-    gain.connect(audioContext.destination);
-    gain.gain.setValueAtTime(0.3, audioContext.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-
-    if (type === 'jump') {
-        oscillator.frequency.setValueAtTime(400, audioContext.currentTime);
-    } else if (type === 'score') {
-        oscillator.frequency.setValueAtTime(600, audioContext.currentTime);
-    } else if (type === 'record') {
-        oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
-    }
-
-    oscillator.start(audioContext.currentTime);
-    oscillator.stop(audioContext.currentTime + 0.1);
+    // Sesler kapalı
 }
 
 function fireConfetti() {

@@ -209,8 +209,8 @@ function gameLoop() {
     // Çiçekleri hareket ettir
     pipes = pipes.filter(pipe => pipe.x > -pipeWidth);
 
-    // Yeni çiçek oluştur
-    if (nextPipeX < canvas.width + 400) {
+    // Yeni çiçek oluştur - her zaman yeterli sayıda pipe olmasını sağla
+    if (pipes.length < 8 || nextPipeX < canvas.width + 500) {
         createPipe();
     }
 

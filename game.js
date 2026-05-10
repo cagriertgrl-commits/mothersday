@@ -42,10 +42,14 @@ player.image.onload = () => console.log('Resim yüklendi');
 
 // Borular (Çiçekler)
 let pipes = [];
-let pipeGap = 150;
+let pipeGap = 180;
 let pipeWidth = 80;
-let pipeSpacing = 200;
+let pipeSpacing = 220;
 let nextPipeX = 300;
+let pipeSpeed = 4;
+let basePipeGap = 180;
+let basePipeSpacing = 220;
+let basePipeSpeed = 4;
 
 // En iyi skoru yükle
 bestScoreDisplay.textContent = bestScore;
@@ -65,6 +69,11 @@ function startGame() {
     player.velocity = 0;
     pipes = [];
     nextPipeX = 300;
+
+    // Zorluk parametrelerini sıfırla
+    pipeGap = basePipeGap;
+    pipeSpacing = basePipeSpacing;
+    pipeSpeed = basePipeSpeed;
 
     scoreDisplay.textContent = score;
     console.log('Oyun başladı, gameRunning:', gameRunning);
@@ -183,6 +192,12 @@ updateLeaderboard();
 
 // Ana Oyun Loop
 function gameLoop() {
+    // Zorluk seviyeleri - Skor arttıkça daha zor
+    let difficultyMultiplier = 1 + (score / 50) * 0.3; // Her 50 skorlarda %30 artar
+    pipeGap = Math.max(100, basePipeGap - score / 20); // Boşluk azalıyor (minimum 100)
+    pipeSpacing = Math.max(160, basePipeSpacing - score / 30); // Çubuklar yakınlaşıyor
+    pipeSpeed = basePipeSpeed + (score / 40) * 1.5; // Hız artıyor (max +1.5)
+
     // Arka plan
     ctx.fillStyle = '#fff5f8';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -211,7 +226,7 @@ function gameLoop() {
         }
 
         // Boru hızını ayarla
-        pipe.x -= 4;
+        pipe.x -= pipeSpeed;
     });
 
     // Oyuncu çiz

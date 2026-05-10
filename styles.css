@@ -189,7 +189,7 @@ body {
 }
 
 .tulip-animation {
-    width: 160px;
+    width: 220px;
     height: auto;
     filter: drop-shadow(0 0px 20px rgba(255, 215, 0, 0.4)) drop-shadow(0 15px 30px rgba(217, 70, 166, 0.3));
     animation: tulipBounce 3.5s ease-in-out infinite, tulipSway 4.5s ease-in-out infinite, tulipGlow 2.5s ease-in-out infinite;

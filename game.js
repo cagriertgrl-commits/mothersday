@@ -154,19 +154,44 @@ function createPipe() {
 
 // Çiçek Çiz
 function drawPipe(pipe) {
-    // Üst çiçek
-    ctx.fillStyle = '#ff69b4';
+    // Gradient background for pipe
+    const gradient = ctx.createLinearGradient(pipe.x, 0, pipe.x + pipe.width, 0);
+    gradient.addColorStop(0, '#ff1493');
+    gradient.addColorStop(0.5, '#ff69b4');
+    gradient.addColorStop(1, '#ff1493');
+
+    // Üst çiçek (gradient)
+    ctx.fillStyle = gradient;
     ctx.fillRect(pipe.x, 0, pipe.width, pipe.gapStart);
 
-    // Alt çiçek
+    // Alt çiçek (gradient)
     ctx.fillRect(pipe.x, pipe.gapEnd, pipe.width, canvas.height - pipe.gapEnd);
 
-    // Dekoratif çiçekler
+    // Border for top pipe
+    ctx.strokeStyle = '#ff1493';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(pipe.x, 0, pipe.width, pipe.gapStart);
+
+    // Border for bottom pipe
+    ctx.strokeRect(pipe.x, pipe.gapEnd, pipe.width, canvas.height - pipe.gapEnd);
+
+    // Dekoratif çiçekler - üst kısım
     ctx.fillStyle = '#ffc0cb';
-    for (let i = 0; i < 3; i++) {
-        ctx.fillRect(pipe.x + i * 25, pipe.gapStart - 10, 20, 10);
-        ctx.fillRect(pipe.x + i * 25, pipe.gapEnd, 20, 10);
+    for (let i = 0; i < 5; i++) {
+        ctx.fillRect(pipe.x + 5 + i * 15, pipe.gapStart - 15, 12, 12);
+        ctx.fillRect(pipe.x + 5 + i * 15, pipe.gapStart - 3, 12, 3);
     }
+
+    // Dekoratif çiçekler - alt kısım
+    for (let i = 0; i < 5; i++) {
+        ctx.fillRect(pipe.x + 5 + i * 15, pipe.gapEnd + 3, 12, 12);
+        ctx.fillRect(pipe.x + 5 + i * 15, pipe.gapEnd + 15, 12, 3);
+    }
+
+    // Inner glow effect
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+    ctx.fillRect(pipe.x + 2, pipe.gapStart - 5, pipe.width - 4, 5);
+    ctx.fillRect(pipe.x + 2, pipe.gapEnd, pipe.width - 4, 5);
 }
 
 // Oyuncu Çiz

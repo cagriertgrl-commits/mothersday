@@ -195,7 +195,7 @@ function gameLoop() {
     pipes = pipes.filter(pipe => pipe.x > -pipeWidth);
 
     // Yeni çiçek oluştur
-    if (nextPipeX < canvas.width + 200) {
+    if (nextPipeX < canvas.width + 400) {
         createPipe();
     }
 
